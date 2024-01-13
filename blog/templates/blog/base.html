@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %} {% if title %}
+    <title>{{title}}</title>
+    {% else %}
+    <title>Django Blog</title>
+    {% endif%}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'main.css' %}" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="{% url 'blog:blog-home' %}"
+            >Django Blog</a
+          >
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse justify-content-center"
+            id="navbarNav"
+          >
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="{% url 'blog:blog-home' %}"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'blog:blog-about' %}">About</a>
+              </li>
+            </ul>
+            <div class="navbar-nav mobile">
+              <a href="#" class="nav-item nav-link">Login</a>
+              <a
+                href="{% url 'users:users-register' %}"
+                class="nav-item nav-link"
+                >Register</a
+              >
+            </div>
+          </div>
+          <div class="navbar-nav desktop">
+            <a href="#" class="nav-item nav-link">Login</a>
+            <a href="{% url 'users:users-register' %}" class="nav-item nav-link"
+              >Register</a
+            >
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!--Main Section-->
+    <main class="container mt-5" role="main">
+      <section class="row">
+        <div class="col-md-8">
+          {% if messages %} {% for message in messages %}
+          <div class="alert alert-{{message.tags}}">{{message}}</div>
+          {% endfor %} {% endif %} {% block content %} {% endblock %}
+        </div>
+        <div class="col-md-4">
+          <div class="content-section">
+            <h3>Our Sidebar</h3>
+            <p class="text-muted">
+              You can put any information here you'd like
+            </p>
+            <ul class="list-group">
+              <li class="list-group-item">Latest Post</li>
+              <li class="list-group-item">Announcements</li>
+              <li class="list-group-item">Calenders</li>
+              <li class="list-group-item">etc</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  </body>
+</html>
